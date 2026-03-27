@@ -1,12 +1,22 @@
 plugins {
-    id("java")
+    id("application")
+    id("checkstyle")
+    id("jacoco")
 }
 
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
+application{
+    mainClass.set("hexlet.code.App")
+}
+
 repositories {
     mavenCentral()
+}
+
+checkstyle {
+    toolVersion = "10.12.4"
 }
 
 dependencies {
@@ -17,4 +27,9 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
 }
