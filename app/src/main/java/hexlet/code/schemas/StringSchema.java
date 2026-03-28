@@ -1,16 +1,14 @@
 package hexlet.code.schemas;
 
-public class StringSchema {
+public final class StringSchema extends BaseSchema<String> {
 
-    private int ifNull = 0;
     private Integer ifMin;
     private String mandatoryLine;
 
-    public StringSchema() { }
-
-    private void setIfNull(Integer newIfNull) {
-        this.ifNull = newIfNull;
+    public StringSchema() {
+        super();
     }
+
     private void setIfMin(int newIfMin) {
         this.ifMin = newIfMin;
     }
@@ -19,11 +17,8 @@ public class StringSchema {
         this.mandatoryLine = newMandatoryLine;
     }
 
-    public final void required() {
-        setIfNull(1);
-    }
 
-    public final StringSchema minLength(int min) {
+    public StringSchema minLength(int min) {
         if (min >= 0) {
             setIfMin(min);
             return this;
@@ -33,18 +28,13 @@ public class StringSchema {
         }
     }
 
-    public final StringSchema contains(String line) {
+    public StringSchema contains(String line) {
         setMandatoryLine(line);
         return this;
     }
 
-    public final boolean isValid(String line) {
-        if (ifNull == 1) {
-            if (line.isEmpty()) {
-                return false;
-            }
-        }
-
+    @Override
+    public boolean validate(String line) {
         if (ifMin != null) {
             if (line.length() < ifMin) {
                 return false;

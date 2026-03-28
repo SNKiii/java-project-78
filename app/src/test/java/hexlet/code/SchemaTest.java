@@ -8,6 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SchemaTest {
 
     private static final int NUMBER_LENGTH = 12;
+    private static final int NUMBER_ONE = 10;
+    private static final int NUMBER_TWO = 5;
+
     @Test
     public void stringSchemaTest() {
         var valid1 = new Validator();
@@ -26,5 +29,28 @@ public class SchemaTest {
 
         var schema1 = valid1.string();
         assertTrue(schema1.isValid(""));
+    }
+
+    @Test
+    public void numberSchemaTest() {
+        var valid1 = new Validator();
+        var schema = valid1.number();
+        assertTrue(schema.isValid(null));
+
+        schema.required();
+        assertFalse(schema.isValid(null));
+        assertTrue(schema.isValid(1));
+
+        schema.range(1, NUMBER_ONE);
+        assertTrue(schema.isValid(NUMBER_ONE));
+        schema.range(1, NUMBER_ONE);
+        assertFalse(schema.isValid(NUMBER_LENGTH));
+
+        schema.positive();
+        assertTrue(schema.isValid(NUMBER_TWO));
+        assertFalse(schema.isValid(-1));
+
+        var schema1 = valid1.number();
+        assertTrue(schema1.isValid(null));
     }
 }
