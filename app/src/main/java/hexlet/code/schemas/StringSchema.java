@@ -34,7 +34,7 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     @Override
-    public boolean validate(String line) {
+    protected boolean validate(String line) {
         if (ifMin != null) {
             if (line.length() < ifMin) {
                 return false;

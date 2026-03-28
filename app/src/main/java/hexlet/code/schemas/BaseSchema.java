@@ -23,5 +23,5 @@ public abstract class BaseSchema<T> {
         return validate(data);
     }
 
-    public abstract boolean validate(T data);
+    protected abstract boolean validate(T data);
 }

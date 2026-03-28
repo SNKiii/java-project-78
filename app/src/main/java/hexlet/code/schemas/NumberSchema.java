@@ -33,7 +33,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     @Override
-    public boolean validate(Integer number) {
+    protected boolean validate(Integer number) {
         if (signLimit != 0) {
             if (number < 0) {
                 return false;
