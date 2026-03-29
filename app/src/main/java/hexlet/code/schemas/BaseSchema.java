@@ -3,8 +3,9 @@ package hexlet.code.schemas;
 public abstract class BaseSchema<T> {
     private int ifNull = 0;
 
-    public final void required() {
+    public final BaseSchema<T> required() {
         setIfNull(1);
+        return this;
     }
 
     private void setIfNull(Integer newIfNull) {

@@ -1,4 +1,5 @@
 package hexlet.code;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -76,5 +77,7 @@ public class SchemaTest {
                 "Two", 2,
                 "Three", NUMBER_TWO
         )));
+
+
     }
 }

@@ -10,10 +10,12 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     private void setIfMin(int newIfMin) {
+
         this.ifMin = newIfMin;
     }
 
     private void setMandatoryLine(String newMandatoryLine) {
+
         this.mandatoryLine = newMandatoryLine;
     }
 

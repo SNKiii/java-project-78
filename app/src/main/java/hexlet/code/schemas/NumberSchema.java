@@ -22,7 +22,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
         return this;
     }
 
-    public void range(int start, int end) {
+    public NumberSchema range(int start, int end) {
         Integer[] newRange = new Integer[(end - start) + 1];
         int count = 0;
         for (int i = start; i <= end; i++) {
@@ -30,6 +30,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
             count++;
         }
         setRange(newRange);
+        return this;
     }
 
     @Override
