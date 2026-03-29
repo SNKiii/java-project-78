@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NumberSchema.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.schemas</a> &gt; <span class="el_source">NumberSchema.java</span></div><h1>NumberSchema.java</h1><pre class="source lang-java linenums">package hexlet.code.schemas;
+
+public final class NumberSchema extends BaseSchema&lt;Integer&gt; {
+<span class="fc" id="L4">    private int signLimit = 0;</span>
+    private Integer[] range;
+
+    public NumberSchema() {
+<span class="fc" id="L8">        super();</span>
+<span class="fc" id="L9">    }</span>
+
+
+    private void setSignLimit(int count) {
+<span class="fc" id="L13">        signLimit = count;</span>
+<span class="fc" id="L14">    }</span>
+
+    private void  setRange(Integer[] newRange) {
+<span class="fc" id="L17">        range = newRange;</span>
+<span class="fc" id="L18">    }</span>
+
+    public NumberSchema positive() {
+<span class="fc" id="L21">        setSignLimit(1);</span>
+<span class="fc" id="L22">        return this;</span>
+    }
+
+    public NumberSchema range(int start, int end) {
+<span class="fc" id="L26">        Integer[] newRange = new Integer[(end - start) + 1];</span>
+<span class="fc" id="L27">        int count = 0;</span>
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        for (int i = start; i &lt;= end; i++) {</span>
+<span class="fc" id="L29">            newRange[count] = i;</span>
+<span class="fc" id="L30">            count++;</span>
+        }
+<span class="fc" id="L32">        setRange(newRange);</span>
+<span class="fc" id="L33">        return this;</span>
+    }
+
+    @Override
+    protected boolean validate(Integer number) {
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if (signLimit != 0) {</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            if (number &lt; 0) {</span>
+<span class="fc" id="L40">                return false;</span>
+            }
+        }
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (range != null) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            for (int i = 0; i &lt; range.length; i++) {</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                if (number.equals(range[i])) {</span>
+<span class="fc" id="L47">                    return true;</span>
+                }
+            }
+<span class="fc" id="L50">        return  false;</span>
+        }
+
+<span class="fc" id="L53">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

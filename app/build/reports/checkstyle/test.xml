@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="10.12.4">
+<file name="C:\Users\slei_ghoul228\IdeaProjects\java-project-778\app\src\test\java\hexlet\code\SchemaTest.java">
+<error line="2" column="8" severity="error" message="Неиспользуемый import - hexlet.code.schemas.BaseSchema." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+<error line="5" column="8" severity="error" message="Неиспользуемый import - java.util.HashMap." source="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+</file>
+</checkstyle>

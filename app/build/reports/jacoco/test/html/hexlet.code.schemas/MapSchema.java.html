@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MapSchema.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.schemas</a> &gt; <span class="el_source">MapSchema.java</span></div><h1>MapSchema.java</h1><pre class="source lang-java linenums">package hexlet.code.schemas;
+
+import java.util.Map;
+
+public class  MapSchema&lt;T, V&gt; extends BaseSchema&lt;Map&lt;T, V&gt;&gt; {
+    private Integer limit;
+    private Map&lt;String, BaseSchema&lt;V&gt;&gt; schemas;;
+
+    public MapSchema() {
+<span class="fc" id="L10">        super();</span>
+<span class="fc" id="L11">    }</span>
+
+    private void setLimit(int newLimit) {
+<span class="fc" id="L14">        limit = newLimit;</span>
+<span class="fc" id="L15">    }</span>
+
+
+    public final void sizeof(int number) {
+<span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if (number &lt; 0) {</span>
+<span class="nc" id="L20">            setLimit(Math.abs(number));</span>
+        } else {
+<span class="fc" id="L22">            setLimit(number);</span>
+        }
+<span class="fc" id="L24">    }</span>
+
+    public final MapSchema&lt;T, V&gt; shape(Map&lt;String, BaseSchema&lt;V&gt;&gt; map) {
+<span class="nc" id="L27">        this.schemas = map;</span>
+<span class="nc" id="L28">        return this;</span>
+    }
+
+    @Override
+    protected final boolean validate(Map&lt;T, V&gt; map) {
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (limit != null) {</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if (map.size() != limit) {</span>
+<span class="fc" id="L35">                return false;</span>
+            }
+        }
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (schemas != null) {</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">            for (Map.Entry&lt;String, BaseSchema&lt;V&gt;&gt; entry : schemas.entrySet()) {</span>
+<span class="nc" id="L40">                String key = entry.getKey();</span>
+<span class="nc" id="L41">                BaseSchema&lt;V&gt; schema = entry.getValue();</span>
+<span class="nc" id="L42">                V value = map.get(key);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">                if (!schema.isValid(value)) {</span>
+<span class="nc" id="L44">                    return false;</span>
+                }
+<span class="nc" id="L46">            }</span>
+        }
+<span class="fc" id="L48">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>

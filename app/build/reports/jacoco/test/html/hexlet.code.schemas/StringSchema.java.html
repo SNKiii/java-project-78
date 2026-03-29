@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StringSchema.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">hexlet.code.schemas</a> &gt; <span class="el_source">StringSchema.java</span></div><h1>StringSchema.java</h1><pre class="source lang-java linenums">package hexlet.code.schemas;
+
+public final class StringSchema extends BaseSchema&lt;String&gt; {
+
+    private Integer ifMin;
+    private String mandatoryLine;
+
+    public StringSchema() {
+<span class="fc" id="L9">        super();</span>
+<span class="fc" id="L10">    }</span>
+
+    private void setIfMin(int newIfMin) {
+
+<span class="fc" id="L14">        this.ifMin = newIfMin;</span>
+<span class="fc" id="L15">    }</span>
+
+    private void setMandatoryLine(String newMandatoryLine) {
+
+<span class="fc" id="L19">        this.mandatoryLine = newMandatoryLine;</span>
+<span class="fc" id="L20">    }</span>
+
+
+    public StringSchema minLength(int min) {
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (min &gt;= 0) {</span>
+<span class="fc" id="L25">            setIfMin(min);</span>
+<span class="fc" id="L26">            return this;</span>
+        } else {
+<span class="nc" id="L28">            setIfMin(Math.abs(min));</span>
+<span class="nc" id="L29">            return this;</span>
+        }
+    }
+
+    public StringSchema contains(String line) {
+<span class="fc" id="L34">        setMandatoryLine(line);</span>
+<span class="fc" id="L35">        return this;</span>
+    }
+
+    @Override
+    protected boolean validate(String line) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (ifMin != null) {</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            if (line.length() &lt; ifMin) {</span>
+<span class="fc" id="L42">                return false;</span>
+            }
+        }
+
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if (mandatoryLine != null) {</span>
+<span class="fc" id="L47">            return line.contains(mandatoryLine);</span>
+        }
+
+<span class="fc" id="L50">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.13.202504020838</span></div></body></html>
