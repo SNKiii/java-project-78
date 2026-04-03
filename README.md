@@ -25,18 +25,18 @@ schema.isValid("Bat");           // false
 
 Валидация чисел
 
-'''ruby
+```ruby
 NumberSchema schema = v.number();
 
 schema.required().positive().range(10, 20);
 
 schema.isValid(19); // true
 schema.isValid(-25); // false
-'''
+```
 
 Валидация сложных структур (Shape)
 
-'''ruby
+```ruby
 MapSchema<String, String> schema = v.map();
 
 Map<String, BaseSchema<String>> schemas = new HashMap<>();
@@ -50,4 +50,4 @@ human.put("firstName", "John");
 human.put("lastName", "D");
 
 schema.isValid(human); // false (lastName слишком короткий)
-'''
+```
