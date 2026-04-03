@@ -1,28 +1,28 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Predicate;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class BaseSchema<T> {
-    private int ifNull = 0;
+    protected boolean required = false;
+    protected Map<String, Predicate<T>> check = new HashMap<>();
 
-    public final BaseSchema<T> required() {
-        setIfNull(1);
-        return this;
+    protected void addCheck (String name, Predicate<T> validate) {
+        check.put(name, validate);
     }
 
-    private void setIfNull(Integer newIfNull) {
-        this.ifNull = newIfNull;
-    }
+    public final boolean isValid (T value) {
+        if((required && value == null) || (required && value instanceof String && ((String) value).isEmpty())) {
+            return false;
+        }
 
-    public final boolean isValid(T data) {
-        if (data instanceof String) {
-            if (ifNull != 0 && ((String) data).isEmpty()) {
-                return  false;
+        for (String key : check.keySet()) {
+            if (!check.get(key).checking(value)) {
+                return false;
             }
         }
-        if (ifNull != 0 && data == null) {
-            return  false;
-        }
-        return validate(data);
+        return true;
     }
-
-    protected abstract boolean validate(T data);
 }

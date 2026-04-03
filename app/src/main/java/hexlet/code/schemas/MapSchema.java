@@ -1,50 +1,41 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Predicate;
+
 import java.util.Map;
 
 public class  MapSchema<T, V> extends BaseSchema<Map<T, V>> {
-    private Integer limit;
-    private Map<String, BaseSchema<V>> schemas;;
+    protected Integer limit;
+    private Map<String, BaseSchema<V>> schemas;
 
     public MapSchema() {
         super();
     }
 
-    private void setLimit(int newLimit) {
-        limit = newLimit;
-    }
-
-
-    public final void sizeof(int number) {
-        if (number < 0) {
-            setLimit(Math.abs(number));
-        } else {
-            setLimit(number);
-        }
-    }
-
-    public final MapSchema<T, V> shape(Map<String, BaseSchema<V>> map) {
-        this.schemas = map;
+    public MapSchema<T, V> required() {
+        required = true;
         return this;
     }
 
-    @Override
-    protected final boolean validate(Map<T, V> map) {
-        if (limit != null) {
-            if (map.size() != limit) {
-                return false;
-            }
-        }
-        if (schemas != null) {
-            for (Map.Entry<String, BaseSchema<V>> entry : schemas.entrySet()) {
+    public MapSchema<T, V> sizeof(int number) {
+        Predicate<Map<T, V>> test = new Predicate<>((map) -> map.size() == number);
+        addCheck("sizeof", test);
+        return this;
+    }
+
+    public final MapSchema<T, V> shape(Map<String, BaseSchema<V>> map) {
+        Predicate<Map<T, V>> test = new Predicate<>((newMap) -> {
+            for (Map.Entry<String, BaseSchema<V>> entry : map.entrySet()) {
                 String key = entry.getKey();
                 BaseSchema<V> schema = entry.getValue();
-                V value = map.get(key);
-                if (!schema.isValid(value)) {
-                    return false;
-                }
-            }
+                V value = newMap.get(key);
+
+                return schema.isValid(value);
         }
-        return true;
+            return true;
+        });
+        addCheck("shape", test);
+        this.schemas = map;
+        return this;
     }
 }

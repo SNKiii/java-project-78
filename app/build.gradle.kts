@@ -1,5 +1,5 @@
 plugins {
-    id("application")
+    id("java")
     id("checkstyle")
     id("jacoco")
     id("org.sonarqube") version "7.2.3.7755"
@@ -8,9 +8,7 @@ plugins {
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
 
-application{
-    mainClass.set("hexlet.code.App")
-}
+
 
 sonar {
     properties {
