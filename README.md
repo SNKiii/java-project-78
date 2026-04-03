@@ -2,8 +2,9 @@
 [![Actions Status](https://github.com/SNKiii/java-project-78/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/SNKiii/java-project-78/actions)
 [![SonarQube](https://github.com/SNKiii/java-project-78/actions/workflows/build.yml/badge.svg)](https://github.com/SNKiii/java-project-78/actions/workflows/build.yml)
 
-Java Validator Library
+☕Java Validator Library
 Библиотека на Java для валидации данных различных типов: строк, чисел и словарей. Позволяет строить гибкие цепочки проверок (Fluent Interface) и создавать сложные схемы валидации объектов.
+
 🛡️ Особенности
     Fluent API: удобное построение правил через точку.
     Поддержка различных типов: String, Integer, Map.
