@@ -12,8 +12,8 @@ Java Validator Library
     
     📖 Примеры использования
 Валидация строк
-java
 
+```ruby
 Validator v = new Validator();
 StringSchema schema = v.string();
 
@@ -21,6 +21,7 @@ schema.required().minLength(5).contains("Battom");
 
 schema.isValid("Battom case"); // true
 schema.isValid("Bat");           // false
+```
 
 Валидация чисел
 
