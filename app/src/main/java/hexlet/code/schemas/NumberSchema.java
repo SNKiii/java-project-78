@@ -9,7 +9,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema required() {
-        required = true;
+        setRequired(true);
         return this;
     }
 

@@ -8,7 +8,7 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema required() {
-        required = true;
+        setRequired(true);
         return this;
     }
 

@@ -6,15 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseSchema<T> {
-    protected boolean required = false;
-    protected Map<String, Predicate<T>> check = new HashMap<>();
+    private boolean required = false;
+    private Map<String, Predicate<T>> check = new HashMap<>();
 
-    protected void addCheck (String name, Predicate<T> validate) {
+    protected final void setRequired(boolean bool) {
+        this.required = bool;
+    }
+    protected final void addCheck(String name, Predicate<T> validate) {
         check.put(name, validate);
     }
 
-    public final boolean isValid (T value) {
-        if((required && value == null) || (required && value instanceof String && ((String) value).isEmpty())) {
+    public final boolean isValid(T value) {
+        if ((required && value == null) || (required && value instanceof String && ((String) value).isEmpty())) {
             return false;
         }
 

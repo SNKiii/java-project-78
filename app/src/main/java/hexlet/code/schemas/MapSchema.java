@@ -5,19 +5,19 @@ import hexlet.code.Predicate;
 import java.util.Map;
 
 public class  MapSchema<T, V> extends BaseSchema<Map<T, V>> {
-    protected Integer limit;
+    private Integer limit;
     private Map<String, BaseSchema<V>> schemas;
 
     public MapSchema() {
         super();
     }
 
-    public MapSchema<T, V> required() {
-        required = true;
+    public final MapSchema<T, V> required() {
+        setRequired(true);
         return this;
     }
 
-    public MapSchema<T, V> sizeof(int number) {
+    public final MapSchema<T, V> sizeof(int number) {
         Predicate<Map<T, V>> test = new Predicate<>((map) -> map.size() == number);
         addCheck("sizeof", test);
         return this;
