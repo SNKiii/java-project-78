@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
+import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema<Integer> {
 
@@ -14,13 +14,13 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema positive() {
-        Predicate<Integer> test = new Predicate<>((number) -> number >= 0);
+        Predicate<Integer> test = (number) -> number == null || number > 0;
         addCheck("positive", test);
         return this;
     }
 
     public NumberSchema range(int start, int end) {
-        Predicate<Integer> test = new Predicate<>((number) -> number >= start && number <= end);
+        Predicate<Integer> test = (number) -> number != null && number >= start && number <= end;
         addCheck("range", test);
         return this;
     }

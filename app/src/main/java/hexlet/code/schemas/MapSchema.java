@@ -1,41 +1,40 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
-
 import java.util.Map;
+import java.util.function.Predicate;
 
-public class  MapSchema<T, V> extends BaseSchema<Map<T, V>> {
-    private Integer limit;
-    private Map<String, BaseSchema<V>> schemas;
+public class  MapSchema extends BaseSchema<Map<?, ?>> {
 
     public MapSchema() {
         super();
     }
 
-    public final MapSchema<T, V> required() {
+    public final MapSchema required() {
         setRequired(true);
         return this;
     }
 
-    public final MapSchema<T, V> sizeof(int number) {
-        Predicate<Map<T, V>> test = new Predicate<>((map) -> map.size() == number);
+    public final MapSchema sizeof(int number) {
+        Predicate<Map<?, ?>> test = (map) -> map != null && map.size() == number;
         addCheck("sizeof", test);
         return this;
     }
 
-    public final MapSchema<T, V> shape(Map<String, BaseSchema<V>> map) {
-        Predicate<Map<T, V>> test = new Predicate<>((newMap) -> {
-            for (Map.Entry<String, BaseSchema<V>> entry : map.entrySet()) {
+    public final <T> MapSchema shape(Map<String, BaseSchema<T>> map) {
+        Predicate<Map<?, ?>> test = (newMap) -> {
+            for (Map.Entry<String, BaseSchema<T>> entry : map.entrySet()) {
                 String key = entry.getKey();
-                BaseSchema<V> schema = entry.getValue();
-                V value = newMap.get(key);
+                BaseSchema<T> schema = entry.getValue();
+                T value = (T) newMap.get(key);
 
-                return schema.isValid(value);
-        }
+                if (!schema.isValid(value)) {
+                    return false;
+                }
+            }
             return true;
-        });
+        };
         addCheck("shape", test);
-        this.schemas = map;
         return this;
     }
 }
+

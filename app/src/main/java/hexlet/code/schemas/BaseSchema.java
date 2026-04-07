@@ -1,9 +1,8 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Predicate;
 
 public abstract class BaseSchema<T> {
     private boolean required = false;
@@ -16,13 +15,17 @@ public abstract class BaseSchema<T> {
         check.put(name, validate);
     }
 
+    public final void setCheck(Map<String, Predicate<T>> newCheck) {
+        this.check = newCheck;
+    }
+
     public final boolean isValid(T value) {
         if ((required && value == null) || (required && value instanceof String && ((String) value).isEmpty())) {
             return false;
         }
 
         for (String key : check.keySet()) {
-            if (!check.get(key).checking(value)) {
+            if (!check.get(key).test(value)) {
                 return false;
             }
         }

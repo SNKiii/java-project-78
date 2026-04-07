@@ -1,6 +1,6 @@
 package hexlet.code.schemas;
 
-import hexlet.code.Predicate;
+import java.util.function.Predicate;
 
 public final class StringSchema extends BaseSchema<String> {
     public StringSchema() {
@@ -13,13 +13,13 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema minLength(int min) {
-    Predicate<String> test = new Predicate<>((line) -> line.length() >= min);
-    addCheck("minLength", test);
-    return this;
+        Predicate<String> test = ((line) -> line.length() >= min);
+        addCheck("minLength", test);
+        return this;
     }
 
     public StringSchema contains(String line) {
-        Predicate<String> test = new Predicate<>((string) -> string.contains(line));
+        Predicate<String> test = ((string) -> string.contains(line));
         addCheck("contains", test);
         return this;
     }
